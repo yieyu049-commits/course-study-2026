@@ -559,6 +559,7 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
 .auth-copy { color: #52674e; font-size: 14px; line-height: 1.9; overflow-wrap: anywhere; }
 .auth-notice { padding: 13px 15px; margin-top: 19px; border-radius: 9px; color: #52674e; background: #f0f5e9; font-size: 13px; line-height: 1.85; overflow-wrap: anywhere; }
 .auth-notice[data-state="error"], .auth-notice.error { background: #fff0e5; color: #80512f; }
+.auth-scope-note { margin-top: 12px; font-size: 12px; }
 .auth-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 23px; }
 .auth-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; min-height: 44px; border: 1px solid var(--forest); border-radius: 9px; background: var(--forest); color: #fff; font-size: 13px; line-height: 1.6; font-weight: 600; }
 .auth-button:hover { background: var(--forest-dark); }
@@ -567,6 +568,8 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
 .auth-account-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 6px 10px; color: #52674e; font-size: 12px; line-height: 1.6; }
 .auth-account-bar > span, .auth-account-bar > div { min-width: 0; overflow-wrap: anywhere; }
 .auth-account-bar .auth-button { padding: 6px 10px; min-height: 36px; font-size: 12px; }
+.auth-role { display: inline-flex; padding: 3px 8px; border: 1px solid #d8e3cf; border-radius: 999px; background: #f0f5e9; color: #52674e; font-size: 11px; white-space: nowrap; }
+.auth-role[data-role="admin"] { background: #e5edda; border-color: #bed0ae; color: var(--forest); }
 .topbar { flex-wrap: wrap; }
 .topbar-actions { flex-wrap: wrap; justify-content: flex-end; }
 .auth-admin-panel { margin-bottom: 22px; }
@@ -603,7 +606,7 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
 </head>
 <body>
 <a class="skip-link" href="#mainContent">跳到課程內容</a>
-<main id="authGate" class="auth-gate" aria-live="polite"><section class="auth-card"><p class="section-kicker">課間 · 學習空間</p><h1 class="auth-title">登入，接續你的學習。</h1><p class="auth-copy">正在確認登入狀態。使用 Google 帳號登入並經核准後，即可查看課程與同步自己的閱讀進度。</p></section></main>
+<main id="authGate" class="auth-gate" aria-live="polite"><section class="auth-card"><p class="section-kicker">課間 · 學習空間</p><h1 class="auth-title">登入，接續你的學習。</h1><p class="auth-copy">正在確認登入狀態。使用 Google 帳號申請檢視者身分，經核准後可查看課程與同步自己的閱讀進度。</p></section></main>
 <div class="app-shell" id="studyApp" hidden>
   <aside class="sidebar" aria-label="課程導覽">
     <a class="brand" href="#" aria-label="課間，回到今天的日曆"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M18 29V14m0 8C7 23 6 15 7 9c8 0 13 4 11 13Zm0-6C17 7 24 4 30 5c0 7-5 12-12 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-copy"><strong>課間</strong><small>每週，讀得有方向。</small></span></a>
@@ -614,7 +617,7 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
     <div class="sidebar-bottom"><span class="local-indicator"></span><div><strong>自己的閱讀步調</strong><small>已讀、完成與收藏同步到你的帳號</small></div></div>
   </aside>
   <main class="main-area" id="mainContent">
-    <header class="topbar"><div class="breadcrumb">學習空間 <span>/</span> <strong id="viewCrumb">學習日曆</strong></div><div class="topbar-actions"><div id="authAccount" class="auth-account-bar"></div><button class="icon-button" id="helpButton" aria-label="網站使用說明"></button><a class="source-link" id="sourceLink" target="_blank" rel="noopener noreferrer">原始索引 <span aria-hidden="true">↗</span></a></div></header>
+    <header class="topbar"><div class="breadcrumb">學習空間 <span>/</span> <strong id="viewCrumb">學習日曆</strong></div><div class="topbar-actions"><div id="authAccount" class="auth-account-bar"></div><button class="icon-button" id="helpButton" aria-label="網站使用說明"></button><a class="source-link" id="sourceLink" target="_blank" rel="noopener noreferrer" hidden>管理員索引 <span aria-hidden="true">↗</span></a></div></header>
     <section id="adminPanel" class="auth-admin-panel" aria-label="使用者存取審核" hidden></section>
     <nav class="mobile-view-tabs" aria-label="手機主要功能"><button class="category-tab" data-view="calendar">學習日曆</button><button class="category-tab" data-view="week">每週課程</button><button class="category-tab" data-view="library">資料書架</button></nav>
     <section class="hero" aria-labelledby="heroTitle"><div class="hero-copy"><div class="eyebrow" id="heroEyebrow">THIS WEEK, YOUR FOCUS</div><h1 id="heroTitle">把每一堂，準備好。</h1><p id="heroSubtitle"></p><p class="hero-note" id="heroNote">從課程主題出發，直接抵達需要的資料。</p></div><div class="week-emblem" aria-hidden="true"><small id="emblemLabel">STUDY WEEK</small><span class="large-week" id="weekEmblem">06</span><span id="emblemFoot">一起穩穩向前</span></div></section>
@@ -629,7 +632,7 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
     <footer class="help-bar"><span id="snapshotNote"></span><button id="aboutButton" class="text-button">使用方式與資料範圍 <span aria-hidden="true">↗</span></button></footer>
   </main>
 </div>
-<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按四種類型篩選與收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。Moodle 標示的是資料來源，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。開啟原始資料仍需要對應的 Google Drive 權限。</p><p id="dataAbout"></p></div></dialog>
+<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按四種類型篩選與收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。Moodle 標示的是資料來源，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。檢視者可查看課程與教材並更新自己的進度，無法管理網站、編輯索引或管理雲端硬碟。開啟原始資料仍需要對應的 Google Drive 檢視權；網站核准與原檔授權分開，僅能申請管理員指定教材範圍的檢視權。</p><p id="dataAbout"></p></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 <noscript><p class="empty-state">請使用允許 JavaScript 的瀏覽器開啟此網站。</p></noscript>
 <script>
@@ -883,7 +886,7 @@ window.STUDY_AUTH_CONFIG = {
 <script>
 (() => {
   'use strict';
-  let data=null,authorized=false,mountGeneration=0,patchBusy=false,progressRevision=-1,onPatch=null,onRefresh=null;
+  let data=null,authorized=false,isOwner=false,mountGeneration=0,patchBusy=false,progressRevision=-1,onPatch=null,onRefresh=null;
   const $ = id => document.getElementById(id);
   const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const icons = {
@@ -969,12 +972,14 @@ window.STUDY_AUTH_CONFIG = {
   }
   function route(){const p=new URLSearchParams({week:String(state.week),view:state.view});if(state.view==='calendar')p.set('date',state.date);if(state.course!=='all')p.set('course',state.course);try{history.replaceState(null,'','#'+p.toString());}catch{}}
   function metadata(){
-    $('sourceLink').href=urlFor(data.meta.sourceUrl);
+    $('sourceLink').hidden=!isOwner;
+    if(isOwner)$('sourceLink').href=urlFor(data.meta.sourceUrl);
+    else $('sourceLink').removeAttribute('href');
     $('weekSelect').innerHTML=Array.from({length:maxWeek},(_,i)=>{const w=i+1,[a,b]=weekDates(w);return `<option value="${w}">第 ${String(w).padStart(2,'0')} 週 · ${a.slice(5).replace('-','/')} – ${b.slice(5).replace('-','/')}</option>`;}).join('');
     $('courseSelect').innerHTML='<option value="all">全部課程</option>'+data.courses.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
     const updated=String(data.meta.updatedAt||'').slice(0,10).replaceAll('-','/');
     $('snapshotNote').textContent=`索引版本 ${updated||'未註明'} · 開啟原檔需網路及 Google Drive 權限`;
-    $('dataAbout').textContent=`收錄 ${data.courses.length} 門課、${data.sessions.length} 個課程時段；${usableCount()} 份可用資料及 ${data.materials.length-usableCount()} 份待核對。${data.meta.excludedCount?`另有 ${data.meta.excludedCount} 份未納入本網站，可在原始索引回查原因。`:''}份數包含不同版本與已標記的重複資料。`;
+    $('dataAbout').textContent=`收錄 ${data.courses.length} 門課、${data.sessions.length} 個課程時段；${usableCount()} 份可用資料及 ${data.materials.length-usableCount()} 份待核對。${isOwner&&data.meta.excludedCount?`另有 ${data.meta.excludedCount} 份未納入本網站，可在原始索引回查原因。`:''}份數包含不同版本與已標記的重複資料。`;
     $('courseTotal').textContent=data.courses.length;
   }
   function syncStatus(status={}){
@@ -986,9 +991,10 @@ window.STUDY_AUTH_CONFIG = {
     $('syncRetry').textContent=statusState==='loading'?'更新中…':'更新索引';
     if(status.updatedAt)$('syncStatus').title=`索引更新：${status.updatedAt}`;
   }
-  function applyData(next){
+  function applyData(next,options){
     if(!authorized)return false;
     if(!validateData(next)){syncStatus({state:'error',message:'收到的索引格式不完整，保留目前資料。'});return false;}
+    if(options)isOwner=options.isOwner===true;
     data=next;rebuildData();
     if(state.course!=='all'&&!courseMap.has(state.course))state.course='all';
     state.week=state.view==='calendar'?weekForDate(state.date):Math.min(maxWeek,Math.max(1,state.week));
@@ -1136,12 +1142,12 @@ window.STUDY_AUTH_CONFIG = {
     document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();if(!authorized)return;state.course='all';state.view='calendar';state.q='';$('searchInput').value='';selectDate(today);});
   }
   function lock(){
-    mountGeneration++;authorized=false;patchBusy=false;progressRevision=-1;onPatch=null;onRefresh=null;
+    mountGeneration++;authorized=false;isOwner=false;patchBusy=false;progressRevision=-1;onPatch=null;onRefresh=null;
     data=null;courseMap.clear();materialMap.clear();done.clear();saved.clear();read.clear();start=0;maxWeek=1;currentWeek=1;
     $('studyApp').hidden=true;
     for(const id of ['courseNav','weekSelect','courseSelect','statsStrip','filterSummary','calendarGrid','dayAgenda','calendarFlexible','weeklyView','materialResults'])$(id).innerHTML='';
     for(const id of ['courseTotal','snapshotNote','dataAbout','syncStatus','progressStatus','heroSubtitle','calendarMonth','agendaTitle','agendaWeek','agendaProgress','weekEmblem','loadMore','toast'])$(id).textContent='';
-    $('sourceLink').removeAttribute('href');$('syncStatus').removeAttribute('title');
+    $('sourceLink').hidden=true;$('sourceLink').removeAttribute('href');$('syncStatus').removeAttribute('title');
     $('searchInput').value='';$('includePending').checked=false;$('onlySaved').checked=false;
     $('calendarView').hidden=true;$('weeklyView').hidden=true;$('materialsView').hidden=true;$('loadMore').hidden=true;
     $('toast').hidden=true;clearTimeout(notify.timer);
@@ -1151,7 +1157,7 @@ window.STUDY_AUTH_CONFIG = {
   function unlock(options={}){
     lock();
     if(!validateData(options.data)||!validateProgress(options.progress)||typeof options.onPatch!=='function')throw new Error('已核准帳號的資料或進度尚未完整載入');
-    data=options.data;rebuildData();replaceProgress(options.progress);onPatch=options.onPatch;onRefresh=typeof options.onRefresh==='function'?options.onRefresh:null;
+    data=options.data;isOwner=options.isOwner===true;rebuildData();replaceProgress(options.progress);onPatch=options.onPatch;onRefresh=typeof options.onRefresh==='function'?options.onRefresh:null;
     resetState(initialRouteAvailable);initialRouteAvailable=false;authorized=true;
     metadata();render();progressStatus('已同步你的帳號進度');syncStatus({state:'fresh'});$('syncRetry').hidden=!onRefresh;$('studyApp').hidden=false;
     return true;
@@ -1212,12 +1218,13 @@ window.STUDY_AUTH_CONFIG = {
     }
     function renderGate(title, message, {login = false, retry = false, logout = false, busy = false, reloadLogin = false} = {}) {
       gate.hidden = false;
-      gate.innerHTML = `<section class="auth-card" aria-labelledby="authTitle"><p class="section-kicker">課間 · 帳號存取</p><h1 id="authTitle" class="auth-title">${esc(title)}</h1><p class="auth-copy" role="status">${esc(message)}</p><p class="auth-notice">首次使用 Google 登入後，系統會將你的姓名與電子郵件寄給管理員 ${esc(config.ownerEmail || 'yieyu049@gmail.com')} 申請存取；核准後才能使用。已讀、課程完成與收藏會保存在你自己的帳號。</p><div class="auth-actions">${login?'<button type="button" class="auth-button" data-auth-action="login">使用 Google 登入並申請</button>':''}${retry?'<button type="button" class="auth-button" data-auth-action="retry">重新確認狀態</button>':''}${logout?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出／更換帳號</button>':''}${reloadLogin?'<button type="button" class="auth-button" data-auth-action="reload-login">重新載入登入頁</button>':''}${busy?'<span class="auth-status">處理中…</span>':''}</div></section>`;
+      gate.innerHTML = `<section class="auth-card" aria-labelledby="authTitle"><p class="section-kicker">課間 · 帳號存取</p><h1 id="authTitle" class="auth-title">${esc(title)}</h1><p class="auth-copy" role="status">${esc(message)}</p><p class="auth-notice">首次登入會將你的姓名與電子郵件寄給管理員 ${esc(config.ownerEmail || 'yieyu049@gmail.com')}，申請檢視者身分。核准後可查看課程與教材，並儲存自己的已讀、課程完成與收藏。申請者不會取得網站管理、索引編輯或雲端硬碟管理權限。</p><p class="auth-copy auth-scope-note">網站核准與 Google Drive 原檔權限分開。無法開啟的教材，僅能向管理員申請指定範圍的檢視權；管理員另行確認原檔權限。</p><div class="auth-actions">${login?'<button type="button" class="auth-button" data-auth-action="login">使用 Google 登入並申請檢視</button>':''}${retry?'<button type="button" class="auth-button" data-auth-action="retry">重新確認狀態</button>':''}${logout?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出／更換帳號</button>':''}${reloadLogin?'<button type="button" class="auth-button" data-auth-action="reload-login">重新載入登入頁</button>':''}${busy?'<span class="auth-status">處理中…</span>':''}</div></section>`;
     }
     function renderAccount(ctx) {
       if (!current(ctx) || !ctx.profile) { account.innerHTML = ''; account.hidden = true; return; }
       account.hidden = false;
-      account.innerHTML = `<div class="auth-account-bar"><span><strong>${esc(ctx.profile.name || ctx.profile.email)}</strong><small>${esc(ctx.profile.email)}</small></span><div class="auth-actions">${ctx.profile.isOwner && ctx.authorized?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">管理申請</button>':''}<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出</button></div></div>`;
+      const role = ctx.profile.isOwner && ctx.authorized ? '管理員' : ctx.authorized ? '檢視者' : '檢視申請待核准';
+      account.innerHTML = `<div class="auth-account-bar"><span><strong>${esc(ctx.profile.name || ctx.profile.email)}</strong><small>${esc(ctx.profile.email)}</small></span><span class="auth-role" data-role="${ctx.profile.isOwner && ctx.authorized ? 'admin' : 'viewer'}">${role}</span><div class="auth-actions">${ctx.profile.isOwner && ctx.authorized?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">管理申請</button>':''}<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出</button></div></div>`;
     }
     function reset() {
       epoch++;
@@ -1294,6 +1301,7 @@ window.STUDY_AUTH_CONFIG = {
       if (!result || result.user?.uid !== ctx.uid || typeof result.user.email !== 'string' || !STATES.includes(result.status)) throw failure('IDENTITY_MISMATCH', '帳號回應不符');
       ctx.profile = {uid: ctx.uid, email: result.user.email, name: String(result.user.name || ''), isOwner: result.user.isOwner === true};
       ctx.status = result.status;
+      if (!ctx.profile.isOwner) { admin.hidden = true; admin.innerHTML = ''; }
       return result;
     }
     function showAccessState(ctx, session) {
@@ -1304,7 +1312,7 @@ window.STUDY_AUTH_CONFIG = {
       const status = session.status;
       if (status === 'pending') {
         const mailFailed = ['failed', 'quota_wait', 'retry_later'].includes(session.notification?.state);
-        renderGate('等待管理員核准', mailFailed ? '申請已記錄，但通知郵件暫時未寄出。請稍後重新確認狀態。' : '申請已記錄，管理員核准後即可開啟你的學習網站。', {retry: true, logout: true});
+        renderGate('等待管理員核准', mailFailed ? '檢視申請已記錄，但通知郵件暫時未寄出。請稍後重新確認狀態。' : '檢視申請已記錄，管理員核准後即可查看課程與教材。', {retry: true, logout: true});
       } else if (status === 'revoked') renderGate('存取權限已撤銷', '管理員已撤銷這個帳號的存取權限。', {retry: true, logout: true});
       else renderGate('目前未獲准存取', '管理員未核准這個帳號。你可以更換帳號或稍後重新確認。', {retry: true, logout: true});
     }
@@ -1350,8 +1358,8 @@ window.STUDY_AUTH_CONFIG = {
           // A progress PATCH can finish while a refresh is in flight.
           if (!ctx.progress || progress.revision > ctx.progress.revision) ctx.progress = progress;
           ctx.authorized = true; gate.hidden = true; gate.innerHTML = ''; renderAccount(ctx);
-          if (alreadyOpen) { app.updateData(data); app.updateProgress(ctx.progress); }
-          else app.unlock({data, progress: ctx.progress, onPatch: (kind, id, checked) => patch(ctx, kind, id, checked), onRefresh: () => refresh(ctx)});
+          if (alreadyOpen) { app.updateData(data, {isOwner: ctx.profile.isOwner}); app.updateProgress(ctx.progress); }
+          else app.unlock({data, progress: ctx.progress, isOwner: ctx.profile.isOwner, onPatch: (kind, id, checked) => patch(ctx, kind, id, checked), onRefresh: () => refresh(ctx)});
           app.setSyncStatus({state: 'fresh', message: '已同步課程與你的學習進度。', updatedAt: data.meta.updatedAt});
           if (ctx.profile.isOwner && adminWanted) await loadAdmin(ctx);
           return data;
@@ -1414,8 +1422,8 @@ window.STUDY_AUTH_CONFIG = {
         const result = await request(ctx, 'admin.list'); requireCurrent(ctx);
         if (!Array.isArray(result?.users)) throw failure('INVALID_RESPONSE', '申請清單不完整');
         const users = result.users.filter(user => typeof user.uid === 'string' && typeof user.email === 'string' && STATES.includes(user.status));
-        const labels = {pending: '待核准', approved: '已核准', denied: '已拒絕', revoked: '已撤銷'};
-        admin.innerHTML = `<section class="auth-admin-card"><div class="auth-actions"><h2>管理存取申請</h2><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">重新整理</button><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-close">關閉</button></div><p class="auth-copy">點選按鈕才會變更權限；開啟郵件連結不會自動核准。</p><div class="auth-admin-list">${users.length ? users.map(user => `<article class="auth-admin-user"><div><strong>${esc(user.name || user.email)}</strong><p>${esc(user.email)}</p><span class="auth-status">${labels[user.status]}</span></div><div class="auth-actions">${user.uid === ctx.uid ? '<span>管理員本人</span>' : `${user.status !== 'approved' ? `<button type="button" class="auth-button" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="approved">核准</button>` : `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="revoked">撤銷權限</button>`}${user.status === 'pending' ? `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="denied">拒絕</button>` : ''}`}</div></article>`).join('') : '<p>目前沒有申請。</p>'}</div></section>`;
+        const labels = {pending: '檢視申請待核准', approved: '檢視者 · 已核准', denied: '已拒絕', revoked: '已撤銷'};
+        admin.innerHTML = `<section class="auth-admin-card"><div class="auth-actions"><h2>管理存取申請</h2><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">重新整理</button><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-close">關閉</button></div><p class="auth-copy">申請者僅可核准為檢視者，可查看課程與教材、儲存自己的學習進度。Google Drive 原檔須另外確認，僅授予指定教材範圍的檢視權。網站核准不會自動變更原檔權限；撤銷網站存取後，也須另行檢查原檔分享設定。</p><p class="auth-copy">只有管理員可管理申請與維護索引；開啟郵件連結不會自動核准。</p><div class="auth-admin-list">${users.length ? users.map(user => `<article class="auth-admin-user"><div><strong>${esc(user.name || user.email)}</strong><p>${esc(user.email)}</p><span class="auth-status">${user.uid === ctx.uid ? '管理員' : labels[user.status]}</span></div><div class="auth-actions">${user.uid === ctx.uid ? '<span>管理員本人</span>' : `${user.status !== 'approved' ? `<button type="button" class="auth-button" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="approved">核准為檢視者</button>` : `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="revoked">撤銷網站存取</button>`}${user.status === 'pending' ? `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="denied">拒絕</button>` : ''}`}</div></article>`).join('') : '<p>目前沒有申請。</p>'}</div></section>`;
       } catch (error) { showError(ctx, error); }
     }
     async function adminSet(uid, status) {
