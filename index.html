@@ -601,6 +601,34 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
 @media print {
   .auth-account-bar, .auth-admin-panel, .account-progress-status { display: none !important; }
 }
+/* Source provenance remains visible beside the material, with filters on the shelf. */
+.source-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 12px; }
+.source-tag { display: inline-block; max-width: 100%; padding: 3px 7px; border: 1px solid #e0e6d9; border-radius: 5px; background: #f4f7ef; color: #536747; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.source-tag-type { color: #496349; background: #eef4e9; border-color: #dce7d2; }
+.source-tag-moodle { color: #7e541b; background: #fff2df; border-color: #eedfc6; }
+.source-tag-year { color: #526b78; background: #edf3f5; border-color: #dce6e9; }
+.source-tag-unknown { color: #6b7067; background: #f5f5f1; border-color: #e4e5de; }
+.source-tags-compact { margin: 5px 0 0; gap: 4px; }
+.source-tags-compact .source-tag { padding: 1px 5px; font-size: 11px; line-height: 1.5; }
+.resource-title { display: block; }
+.resource-row .resource-category, .resource-row .link-arrow { align-self: flex-start; margin-top: 2px; }
+.source-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 12px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: #fafbf7; }
+.source-filters > label { display: grid; flex: 1 1 145px; gap: 6px; min-width: 0; }
+.source-filters > label:nth-child(2) { flex-basis: 210px; }
+.source-filters label > span { color: #61705c; font-size: 12px; }
+.source-filters select { width: 100%; min-width: 0; min-height: 40px; padding: 8px 25px 8px 10px; border: 1px solid #d7e0cf; border-radius: 7px; background: #fff; color: #42553e; font-size: 12px; cursor: pointer; }
+.source-filters .text-button { min-height: 40px; }
+.source-filter-note { margin: 9px 1px 20px; color: #6a7764; font-size: 12px; line-height: 1.75; }
+@media (max-width: 560px) {
+  .source-filters { padding: 12px; gap: 10px; }
+  .source-filters > label, .source-filters > label:nth-child(2) { flex: 1 1 calc(50% - 10px); }
+  .source-filters > label:nth-child(2) { flex-basis: 100%; order: 1; }
+  .source-filters > .text-button { order: 2; }
+  .source-filters select { min-height: 44px; }
+  .source-tags-compact .source-tag { font-size: 11px; }
+  .resource-row .resource-link { align-items: flex-start; }
+}
+@media print { .source-filters, .source-filter-note { display: none !important; } }
 
 </style>
 </head>
@@ -628,11 +656,11 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
     <div class="filter-summary" id="filterSummary" aria-live="polite"></div>
     <section id="calendarView" aria-label="學習日曆" hidden><div class="calendar-shell"><div class="calendar-toolbar"><div><p class="section-kicker">STUDY CALENDAR</p><h2 id="calendarMonth" aria-live="polite"></h2></div><div class="calendar-navigation"><button class="icon-button" id="prevMonth" aria-label="上一個月"></button><button class="today-button" id="todayDate">今天</button><button class="icon-button" id="nextMonth" aria-label="下一個月"></button></div></div><p class="calendar-instructions" id="calendarInstructions">選一天，查看課程與資料。可用方向鍵移動日期。</p><div id="calendarGrid" class="calendar-grid" role="grid" aria-labelledby="calendarMonth" aria-describedby="calendarInstructions"></div></div><section class="day-agenda" aria-labelledby="agendaTitle"><div class="agenda-heading"><div><p class="section-kicker" id="agendaWeek"></p><h2 id="agendaTitle"></h2></div><span id="agendaProgress" class="agenda-progress"></span></div><div id="dayAgenda" class="session-grid"></div></section><div id="calendarFlexible"></div></section>
     <section id="weeklyView" aria-label="每週課程清單" hidden></section>
-    <section id="materialsView" aria-label="資料書架" hidden><div class="library-toolbar"><div class="category-tabs" id="categoryTabs" aria-label="資料類型"></div><div class="library-options"><label class="toggle-field"><input id="includePending" type="checkbox">顯示待核對</label><label class="toggle-field"><input id="onlySaved" type="checkbox">只看收藏</label></div></div><div id="materialResults" class="material-grid"></div><div class="load-more-wrap"><button id="loadMore" class="today-button" hidden>顯示更多資料</button></div></section>
+    <section id="materialsView" aria-label="資料書架" hidden><div class="library-toolbar"><div class="category-tabs" id="categoryTabs" aria-label="資料類型"></div><div class="library-options"><label class="toggle-field"><input id="includePending" type="checkbox">顯示待核對</label><label class="toggle-field"><input id="onlySaved" type="checkbox">只看收藏</label></div></div><div class="source-filters" role="group" aria-label="依資料來源篩選"><label for="sourceTypeFilter"><span>來源類型</span><select id="sourceTypeFilter"></select></label><label for="sourceFilter"><span>署名／來源集合</span><select id="sourceFilter"></select></label><label for="yearFilter"><span>教材學年</span><select id="yearFilter"></select></label><button class="text-button" id="clearSourceFilters" type="button" hidden>清除來源篩選</button></div><p class="source-filter-note">來源標籤依現有索引與原檔記錄；未確認的資訊標為待補。教材學年與本期上課年度可能不同。</p><div id="materialResults" class="material-grid"></div><div class="load-more-wrap"><button id="loadMore" class="today-button" hidden>顯示更多資料</button></div></section>
     <footer class="help-bar"><span id="snapshotNote"></span><button id="aboutButton" class="text-button">使用方式與資料範圍 <span aria-hidden="true">↗</span></button></footer>
   </main>
 </div>
-<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按四種類型篩選與收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。Moodle 標示的是資料來源，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。檢視者可查看課程與教材並更新自己的進度，無法管理網站、編輯索引或管理雲端硬碟。開啟原始資料仍需要對應的 Google Drive 檢視權；網站核准與原檔授權分開，僅能申請管理員指定教材範圍的檢視權。</p><p id="dataAbout"></p></div></dialog>
+<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按資料類型、來源、署名與教材學年篩選及收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。來源標籤列出已知的來源集合與檔名署名，不保證署名者是每份原作者；「學年待補」表示尚未確認原教材學年。Moodle 標示的是資料來源，收錄學期不一定等於教材原學年，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。檢視者可查看課程與教材並更新自己的進度，無法管理網站、編輯索引或管理雲端硬碟。開啟原始資料仍需要對應的 Google Drive 檢視權；網站核准與原檔授權分開，僅能申請管理員指定教材範圍的檢視權。</p><p id="dataAbout"></p></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 <noscript><p class="empty-state">請使用允許 JavaScript 的瀏覽器開啟此網站。</p></noscript>
 <script>
@@ -661,6 +689,28 @@ window.STUDY_AUTH_CONFIG = {
   const normalize = value => text(value).normalize('NFC');
   const unique = values => [...new Set(values)];
   const split = value => unique(text(value).split(/[；;]/).map(normalize).filter(Boolean));
+
+  function academicYear(value) {
+    // Years are original-material metadata, never inferred from the current course.
+    const match = text(value).match(/^(?:民國\s*)?(\d{1,4})\s*(?:學年(?:度)?)?$/);
+    if (!match) return '';
+    const year = Number(match[1]);
+    return (year >= 1 && year <= 300) || (year >= 1900 && year <= 2100) ? String(year) : '';
+  }
+  function materialSourceTags(sourceTags, id, origin) {
+    const fallback = {sourceType: origin === 'moodle' ? 'Moodle' : '', contributor: '', sourceEvidence: ''};
+    if (!Object.prototype.hasOwnProperty.call(sourceTags, id)) return fallback;
+    const value = sourceTags[id];
+    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('資料來源標籤格式不正確');
+    const result = {};
+    for (const [key, max] of [['sourceType', 60], ['contributor', 200], ['sourceEvidence', 2000]]) {
+      if (value[key] !== undefined && typeof value[key] !== 'string') throw new Error('資料來源標籤格式不正確');
+      const tag = normalize(value[key]);
+      if (tag.length > max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(tag)) throw new Error('資料來源標籤內容不正確');
+      result[key] = tag || fallback[key];
+    }
+    return result;
+  }
 
   function hash(value) {
     let a = 2166136261, b = 2246822519;
@@ -747,7 +797,8 @@ window.STUDY_AUTH_CONFIG = {
     return result;
   }
 
-  function buildData(csv, previous = {}, config = {}, fetchedAt = new Date().toISOString()) {
+  function buildData(csv, previous = {}, config = {}, fetchedAt = new Date().toISOString(), sourceTags = {}) {
+    if (!sourceTags || typeof sourceTags !== 'object' || Array.isArray(sourceTags)) throw new Error('資料來源標籤格式不正確');
     const rows = parseCSV(csv);
     if (!rows.length || rows[0].length !== HEADER.length || rows[0].some((cell, i) => text(cell) !== HEADER[i])) {
       throw new Error('同步分頁標頭不符');
@@ -788,7 +839,8 @@ window.STUDY_AUTH_CONFIG = {
       const material = {
         id, courseIds: names.map(name => courseNames.get(name)).filter(Boolean), category, status: c[1], name: c[2],
         topics: c[3], teachers: c[4], description: c[5], url, evidence: c[7], originalTeachers: c[8], teacherMatch: c[9],
-        originalCourse: c[10], year: c[11], term: c[12], examLabel: c[13], format: c[14],
+        originalCourse: c[10], year: c[11], academicYear: academicYear(c[11]), term: c[12], examLabel: c[13], format: c[14],
+        ...materialSourceTags(sourceTags, id, type === 'moodle' ? 'moodle' : 'index'),
         source: type === 'moodle' ? 'Moodle' : c[15], duplicateGroup: c[16], origin: type === 'moodle' ? 'moodle' : 'index'
       };
       materials.push(material); materialsById.set(id, material); materialsByUrl.set(url, id);
@@ -925,12 +977,12 @@ window.STUDY_AUTH_CONFIG = {
   const done=new Set(),saved=new Set(),read=new Set();
   const initialRoute=new URLSearchParams(location.hash.slice(1));
   let initialRouteAvailable=true;
-  const state={week:1,date:today,month:today.slice(0,7),course:'all',view:'calendar',q:'',category:'全部',pending:false,savedOnly:false,limit:60};
+  const state={week:1,date:today,month:today.slice(0,7),course:'all',view:'calendar',q:'',category:'全部',sourceType:'all',source:'all',academicYear:'all',pending:false,savedOnly:false,limit:60};
   function resetState(useRoute=false){
     const hash=useRoute?initialRoute:new URLSearchParams();
     let date=validDate(hash.get('date'))?hash.get('date'):today;
     if(!hash.has('date')&&hash.has('week'))date=weekDates(Math.min(maxWeek,Math.max(1,Math.floor(Number(hash.get('week')))||currentWeek)))[0];
-    Object.assign(state,{week:Math.min(maxWeek,Math.max(1,Math.floor(Number(hash.get('week')))||weekForDate(date))),date,month:date.slice(0,7),course:courseMap.has(hash.get('course'))?hash.get('course'):'all',view:['week','library','calendar'].includes(hash.get('view'))?hash.get('view'):'calendar',q:'',category:'全部',pending:false,savedOnly:false,limit:60});
+    Object.assign(state,{week:Math.min(maxWeek,Math.max(1,Math.floor(Number(hash.get('week')))||weekForDate(date))),date,month:date.slice(0,7),course:courseMap.has(hash.get('course'))?hash.get('course'):'all',view:['week','library','calendar'].includes(hash.get('view'))?hash.get('view'):'calendar',q:'',category:'全部',sourceType:'all',source:'all',academicYear:'all',pending:false,savedOnly:false,limit:60});
   }
   const urlFor = url => {try{const raw=String(url??'').trim(),u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!/[\u0000-\u001f\u007f]/.test(raw)?u.href:'#';}catch{return '#';}};
   const queryMatch = values => !state.q || values.join(' ').toLocaleLowerCase().includes(state.q.toLocaleLowerCase());
@@ -939,7 +991,34 @@ window.STUDY_AUTH_CONFIG = {
   const matCourses = m => (m.courseIds||[]).map(id=>courseMap.get(id)?.name||'').filter(Boolean).join('、');
   const selectedName = () => courseMap.get(state.course)?.name||'全部課程';
   const usableCount = () => data.materials.filter(m=>m.status!=='待核對').length;
-  const moodleBadge = m => m.source==='Moodle'?'<span class="source-badge">Moodle</span>':'';
+  const knownTag = value => {const s=String(value??'').trim();return /^(?:未註明|未確認|待補|待核對|不明|未知|無)$/.test(s)?'':s;};
+  const provenance = m => ({type:knownTag(m.sourceType)||(m.source==='Moodle'?'Moodle':'待補'),contributor:knownTag(m.contributor),source:knownTag(m.source),year:knownTag(m.academicYear)});
+  const yearLabel = year => year?`${year.replace(/學年度?$/,'')} 學年`:'學年待補';
+  const sourceSearch = m => {const p=provenance(m);return [p.type,p.contributor,p.source,p.year,yearLabel(p.year),m.term,m.sourceEvidence];};
+  function sourceTags(m,compact=false){
+    const p=provenance(m),tags=[{text:p.type==='待補'?'來源類型待補':p.type,kind:p.type==='Moodle'?'moodle':'type'}];
+    if(p.contributor)tags.push({text:`署名／提供者：${p.contributor}`,kind:'person'});
+    if(p.source&&p.source!==p.contributor&&p.source!==p.type)tags.push({text:`來源：${p.source}`,kind:'collection'});
+    if(!p.contributor&&!p.source)tags.push({text:'署名／提供者待補',kind:'unknown'});
+    tags.push({text:yearLabel(p.year),kind:p.year?'year':'unknown'});
+    return `<span class="source-tags${compact?' source-tags-compact':''}" aria-label="資料來源標籤">${tags.map(tag=>`<span class="source-tag source-tag-${tag.kind}">${esc(tag.text)}</span>`).join('')}</span>`;
+  }
+  function sourceFilterOptions(){
+    const all=data.materials.map(provenance),unique=values=>[...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'zh-Hant',{numeric:true}));
+    const types=unique(all.map(p=>p.type)),contributors=unique(all.map(p=>p.contributor)),sources=unique(all.map(p=>p.source));
+    const years=unique(all.map(p=>p.year)).reverse();
+    const option=(value,label)=>`<option value="${esc(value)}">${esc(label)}</option>`;
+    if(state.sourceType!=='all'&&!types.includes(state.sourceType))state.sourceType='all';
+    const sourceValues=[...contributors.map(s=>'contributor:'+s),...sources.map(s=>'source:'+s),...(all.some(p=>!p.contributor&&!p.source)?['unknown']:[])];
+    if(state.source!=='all'&&!sourceValues.includes(state.source))state.source='all';
+    if(state.academicYear!=='all'&&!(state.academicYear==='unknown'?all.some(p=>!p.year):years.includes(state.academicYear)))state.academicYear='all';
+    $('sourceTypeFilter').innerHTML=option('all','全部來源類型')+types.map(t=>option(t,t==='待補'?'來源類型待補':t)).join('');
+    $('sourceFilter').innerHTML=option('all','全部署名與來源')+(contributors.length?`<optgroup label="署名／提供者">${contributors.map(s=>option('contributor:'+s,s)).join('')}</optgroup>`:'')+(sources.length?`<optgroup label="來源集合">${sources.map(s=>option('source:'+s,s)).join('')}</optgroup>`:'')+(all.some(p=>!p.contributor&&!p.source)?option('unknown','署名與來源待補'):'');
+    $('yearFilter').innerHTML=option('all','全部教材學年')+years.map(y=>option(y,yearLabel(y))).join('')+(all.some(p=>!p.year)?option('unknown','學年待補'):'');
+  }
+  function sourceMatches(m){const p=provenance(m);return (state.sourceType==='all'||p.type===state.sourceType)&&(state.academicYear==='all'||(state.academicYear==='unknown'?!p.year:p.year===state.academicYear))&&(state.source==='all'||(state.source==='unknown'?!p.contributor&&!p.source:state.source.startsWith('contributor:')?p.contributor===state.source.slice(12):p.source===state.source.slice(7)));}
+  const hasSourceFilter=()=>state.sourceType!=='all'||state.source!=='all'||state.academicYear!=='all';
+  function resetSourceFilters(){state.sourceType='all';state.source='all';state.academicYear='all';}
   const reading = ids => ({total:ids.length,complete:ids.filter(id=>read.has(id)).length});
   function notify(message){if(!authorized)return;$('toast').textContent=message;$('toast').hidden=false;clearTimeout(notify.timer);const generation=mountGeneration;notify.timer=setTimeout(()=>{if(generation===mountGeneration)$('toast').hidden=true;},2500);}
   function validateData(next){
@@ -981,6 +1060,7 @@ window.STUDY_AUTH_CONFIG = {
     $('snapshotNote').textContent=`索引版本 ${updated||'未註明'} · 開啟原檔需網路及 Google Drive 權限`;
     $('dataAbout').textContent=`收錄 ${data.courses.length} 門課、${data.sessions.length} 個課程時段；${usableCount()} 份可用資料及 ${data.materials.length-usableCount()} 份待核對。${isOwner&&data.meta.excludedCount?`另有 ${data.meta.excludedCount} 份未納入本網站，可在原始索引回查原因。`:''}份數包含不同版本與已標記的重複資料。`;
     $('courseTotal').textContent=data.courses.length;
+    sourceFilterOptions();
   }
   function syncStatus(status={}){
     if(!authorized)return false;
@@ -1021,7 +1101,7 @@ window.STUDY_AUTH_CONFIG = {
     $('emblemLabel').textContent=library?'STUDY MATERIALS':calendar?'STUDY MONTH':'STUDY WEEK';$('emblemFoot').textContent=library?'累積你的理解':'一起穩穩向前';
     $('weekSelect').value=String(state.week);$('courseSelect').value=state.course;
     $('prevWeek').disabled=state.week<=1;$('nextWeek').disabled=state.week>=maxWeek;
-    $('searchInput').placeholder=library?'搜尋資料名稱、主題或老師':calendar?'搜尋本月主題、老師或資料':'搜尋本週主題、老師或資料';
+    $('searchInput').placeholder=library?'搜尋名稱、主題、來源或學年':calendar?'搜尋本月主題、老師或資料來源':'搜尋本週主題、老師或資料來源';
     if(library)renderLibrary();else if(calendar)renderCalendar();else renderWeek();
     syncProgressControls();
   }
@@ -1029,7 +1109,7 @@ window.STUDY_AUTH_CONFIG = {
     document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===state.view);b.setAttribute('aria-pressed',String(b.dataset.view===state.view));});
     $('courseNav').innerHTML=[{id:'all',name:'全部課程'},...data.courses].map((c,i)=>{const count=state.view==='library'?data.materials.filter(m=>(c.id==='all'||(m.courseIds||[]).includes(c.id))&&m.status!=='待核對').length:data.sessions.filter(s=>(c.id==='all'||s.courseId===c.id)&&(state.view==='week'?s.week===state.week:s.date?.startsWith(state.month))).length;return `<button class="course-item ${state.course===c.id?'active':''}" data-course="${esc(c.id)}" aria-pressed="${state.course===c.id}"><span class="course-dot" style="--dot-hue:${130+(i*29)%110}"></span><span>${esc(c.name)}</span><span class="course-count">${count}</span></button>`;}).join('');
   }
-  function sessionMatches(s){return (state.course==='all'||s.courseId===state.course)&&queryMatch([s.topic,s.teachers,courseMap.get(s.courseId)?.name||'',...sessionIds(s).map(id=>materialMap.get(id)?.name||'')]);}
+  function sessionMatches(s){return (state.course==='all'||s.courseId===state.course)&&queryMatch([s.topic,s.teachers,courseMap.get(s.courseId)?.name||'',...sessionIds(s).flatMap(id=>{const m=materialMap.get(id);return m?[m.name,...sourceSearch(m)]:[];})]);}
   function stats(items){$('statsStrip').innerHTML=items.map(([value,label,extra])=>`<div class="stat"><strong>${esc(value)}</strong><div><span>${esc(label)}</span>${extra?`<small>${esc(extra)}</small>`:''}</div></div>`).join('');}
   function empty(title,body){return `<div class="empty-state">${svg('search')}<h3>${esc(title)}</h3><p>${esc(body)}</p><button class="today-button" data-reset>清除篩選</button></div>`;}
   function summaryStats(sessions,period){
@@ -1077,28 +1157,30 @@ window.STUDY_AUTH_CONFIG = {
     $('calendarFlexible').innerHTML=flexibleHtml(flexibleSessions());
   }
   function readControl(m,compact=false){return `<label class="read-control ${read.has(m.id)?'is-read':''} ${compact?'compact-read':''}"><input type="checkbox" data-read="${esc(m.id)}"${patchBusy?' disabled':''}${read.has(m.id)?' checked':''} aria-label="已讀：${esc(m.name)}"><span>已讀</span></label>`;}
-  function resourceRow(m){return `<div class="resource-row ${read.has(m.id)?'is-read':''}"><a class="resource-link" href="${esc(urlFor(m.url))}" target="_blank" rel="noopener noreferrer" title="${esc(m.name+'；'+m.status)}"><span class="resource-category ${categoryClass[m.category]||''}">${esc(m.category)}</span><span class="resource-name">${moodleBadge(m)}${esc(m.name)}</span>${svg('arrow','link-arrow')}</a>${readControl(m,true)}</div>`;}
+  function resourceRow(m){return `<div class="resource-row ${read.has(m.id)?'is-read':''}"><a class="resource-link" href="${esc(urlFor(m.url))}" target="_blank" rel="noopener noreferrer" title="${esc(m.name+'；'+m.status)}"><span class="resource-category ${categoryClass[m.category]||''}">${esc(m.category)}</span><span class="resource-name"><span class="resource-title">${esc(m.name)}</span>${sourceTags(m,true)}</span>${svg('arrow','link-arrow')}</a>${readControl(m,true)}</div>`;}
   function sessionCard(s){
     const c=courseMap.get(s.courseId),completed=done.has(s.id),holiday=isHoliday(s),ids=sessionIds(s),recommendations=ids.map(id=>materialMap.get(id)),r=reading(ids);
     const badges=[];if(/假日|放假/.test(s.topic))badges.push('留意放假／補課');if(/考試|期中考|期末考|跑考|筆試/.test(s.topic))badges.push('考核／複習');if(/自主學習/.test(s.topic))badges.push('自主學習');
     return `<article class="session-card ${completed?'is-done':''}"><div class="session-top"><span class="course-label">${esc(c?.name||'未分類課程')}</span>${holiday?'<span class="holiday-label">課綱標示放假</span>':`<button class="done-toggle ${completed?'checked':''}" data-done="${esc(s.id)}"${patchBusy?' disabled':''} aria-pressed="${completed}" aria-label="${completed?'取消課程完成':'標記課程完成'}：${esc((c?.name||'')+' '+s.topic)}">${svg('check')}<span>${completed?'課程已完成':'課程完成'}</span></button>`}</div><h3 class="topic">${esc(s.topic)}</h3><div class="teacher-line">${svg('person')}<span>${esc(s.teachers||'教師未確認')}</span></div>${badges.length?`<div class="session-badges">${badges.map(b=>`<span class="badge">${b}</span>`).join('')}</div>`:''}${r.total?`<div class="session-reading ${r.complete===r.total?'complete':''}"><span>${r.complete===r.total?'本堂資料已讀完':`資料已讀 ${r.complete} / ${r.total}`}</span><progress value="${r.complete}" max="${r.total}" aria-label="本堂資料閱讀進度">${r.complete} / ${r.total}</progress></div>`:''}<div class="resource-list">${recommendations.length?recommendations.map(resourceRow).join(''):`<div class="empty-resource">${holiday?'依老師通知確認實際授課與補課安排。':'此主題尚無直接推薦資料；請以本期講義與老師指定內容補足。'}</div>`}</div><div class="card-actions"><button class="text-button" data-open-course="${esc(s.courseId)}">此課全部資料 ${svg('right')}</button></div>${s.limitations?`<details class="limitations"><summary>使用提醒與資料缺口</summary><p>${esc(s.limitations)}</p></details>`:''}</article>`;
   }
-  function filteredMaterials(){return data.materials.filter(m=>(state.course==='all'||(m.courseIds||[]).includes(state.course))&&(state.category==='全部'||m.category===state.category)&&(state.pending||m.status!=='待核對')&&(!state.savedOnly||saved.has(m.id))&&queryMatch([m.name,m.topics,m.teachers,m.description,m.source,matCourses(m)]));}
+  function filteredMaterials(){return data.materials.filter(m=>(state.course==='all'||(m.courseIds||[]).includes(state.course))&&(state.category==='全部'||m.category===state.category)&&(state.pending||m.status!=='待核對')&&(!state.savedOnly||saved.has(m.id))&&sourceMatches(m)&&queryMatch([m.name,m.topics,m.teachers,m.description,...sourceSearch(m),matCourses(m)]));}
   function renderLibrary(){
     const materials=filteredMaterials(),courseMaterials=data.materials.filter(m=>state.course==='all'||(m.courseIds||[]).includes(state.course)),usable=courseMaterials.filter(m=>m.status!=='待核對');
     stats([[usable.length,'可用資料',selectedName()],[`${usable.filter(m=>read.has(m.id)).length} / ${usable.length}`,'資料已讀','閱讀標記共用於各個檢視'],[saved.size,'我的收藏','隨時回到重要資料']]);
     document.querySelectorAll('[data-category]').forEach(b=>{b.classList.toggle('active',b.dataset.category===state.category);b.setAttribute('aria-pressed',String(b.dataset.category===state.category));});
     $('includePending').checked=state.pending;$('onlySaved').checked=state.savedOnly;
-    $('filterSummary').innerHTML=`<span><strong>${esc(selectedName())}</strong> · 找到 ${materials.length} 份${state.q?` · 搜尋「${esc(state.q)}」`:''}</span><span class="summary-hint">原年份與期中／期末標示不等於本期範圍</span>`;
+    $('sourceTypeFilter').value=state.sourceType;$('sourceFilter').value=state.source;$('yearFilter').value=state.academicYear;
+    $('clearSourceFilters').hidden=!hasSourceFilter();
+    $('filterSummary').innerHTML=`<span><strong>${esc(selectedName())}</strong> · 找到 ${materials.length} 份${state.q?` · 搜尋「${esc(state.q)}」`:''}</span>${state.course!=='all'||state.q||state.category!=='全部'||hasSourceFilter()||state.savedOnly||state.pending?'<button class="text-button" data-reset>清除篩選</button>':'<span class="summary-hint">教材學年依原檔標示；未確認者標為待補</span>'}`;
     $('materialResults').innerHTML=materials.length?materials.slice(0,state.limit).map(materialCard).join(''):empty('還沒有符合的資料',state.savedOnly?'可以先按資料卡上的書籤，收藏想讀的內容。':'試著切換類型、課程或搜尋文字。');
     $('loadMore').hidden=materials.length<=state.limit;$('loadMore').textContent=`再顯示 ${Math.min(60,Math.max(0,materials.length-state.limit))} 份資料`;
   }
   function materialCard(m){
-    const isSaved=saved.has(m.id);
-    return `<article class="material-card ${read.has(m.id)?'material-read':''}"><div class="material-meta"><span class="badge ${categoryClass[m.category]||''}">${esc(m.category)}</span><span class="badge ${statusClass[m.status]||''}">${esc(m.status)}</span>${moodleBadge(m)}</div><span class="course-label">${esc(matCourses(m))}</span><h3>${esc(m.name)}</h3><p class="material-topics">${esc(m.topics||'主題待核對')}</p><div class="teacher-line">${svg('person')}<span>本期：${esc(m.teachers||'教師未確認')}</span></div><details class="limitations"><summary>適用範圍與核對依據</summary><p>${esc(m.description)}</p>${m.teacherMatch?`<p><strong>教師比對：</strong>${esc(m.teacherMatch)}</p>`:''}${m.evidence?`<p><strong>核對依據：</strong>${esc(m.evidence)}</p>`:''}<p class="material-origin">來源：${esc(m.source||'未註明')} · 學年度：${esc(m.year||'未註明')}${m.duplicateGroup?` · 重複群組：${esc(m.duplicateGroup)}`:''}</p></details><footer class="material-footer"><a class="open-link" href="${esc(urlFor(m.url))}" target="_blank" rel="noopener noreferrer">開啟資料 ${svg('arrow')}</a><div class="material-local-actions">${readControl(m)}<button class="bookmark-toggle ${isSaved?'active':''}" data-save="${esc(m.id)}"${patchBusy?' disabled':''} aria-pressed="${isSaved}" aria-label="${isSaved?'取消收藏':'收藏'}：${esc(m.name)}">${svg('save')}<span>${isSaved?'已收藏':'收藏'}</span></button></div></footer></article>`;
+    const isSaved=saved.has(m.id),p=provenance(m);
+    return `<article class="material-card ${read.has(m.id)?'material-read':''}"><div class="material-meta"><span class="badge ${categoryClass[m.category]||''}">${esc(m.category)}</span><span class="badge ${statusClass[m.status]||''}">${esc(m.status)}</span></div><span class="course-label">${esc(matCourses(m))}</span><h3>${esc(m.name)}</h3>${sourceTags(m)}<p class="material-topics">${esc(m.topics||'主題待核對')}</p><div class="teacher-line">${svg('person')}<span>本期：${esc(m.teachers||'教師未確認')}</span></div><details class="limitations"><summary>適用範圍與來源依據</summary><p>${esc(m.description)}</p>${m.teacherMatch?`<p><strong>教師比對：</strong>${esc(m.teacherMatch)}</p>`:''}${m.evidence?`<p><strong>核對依據：</strong>${esc(m.evidence)}</p>`:''}<p class="material-origin"><strong>來源集合：</strong>${esc(p.source||'待補')}<br><strong>署名／提供者：</strong>${esc(p.contributor||'待補')}<br><strong>教材學年：</strong>${esc(yearLabel(p.year))}${p.year&&knownTag(m.term)?` · ${esc(String(m.term).replace(/學期$/,''))}學期`:''}${m.duplicateGroup?`<br>重複群組：${esc(m.duplicateGroup)}`:''}</p>${m.sourceEvidence?`<p><strong>來源標籤依據：</strong>${esc(m.sourceEvidence)}</p>`:''}</details><footer class="material-footer"><a class="open-link" href="${esc(urlFor(m.url))}" target="_blank" rel="noopener noreferrer">開啟資料 ${svg('arrow')}</a><div class="material-local-actions">${readControl(m)}<button class="bookmark-toggle ${isSaved?'active':''}" data-save="${esc(m.id)}"${patchBusy?' disabled':''} aria-pressed="${isSaved}" aria-label="${isSaved?'取消收藏':'收藏'}：${esc(m.name)}">${svg('save')}<span>${isSaved?'已收藏':'收藏'}</span></button></div></footer></article>`;
   }
-  function resetFilters(){state.course='all';state.q='';state.category='全部';state.savedOnly=false;state.pending=false;state.limit=60;$('searchInput').value='';render();}
-  function setView(view){if(!['calendar','week','library'].includes(view))return;if(view==='calendar'&&state.view==='week'){state.date=weekDates(state.week)[0];state.month=state.date.slice(0,7);}state.view=view;state.q='';state.limit=60;$('searchInput').value='';render();window.scrollTo({top:0,behavior:'smooth'});}
+  function resetFilters(){state.course='all';state.q='';state.category='全部';state.savedOnly=false;state.pending=false;state.limit=60;resetSourceFilters();$('searchInput').value='';render();}
+  function setView(view){if(!['calendar','week','library'].includes(view))return;if(view==='calendar'&&state.view==='week'){state.date=weekDates(state.week)[0];state.month=state.date.slice(0,7);}state.view=view;state.q='';state.limit=60;resetSourceFilters();$('searchInput').value='';render();window.scrollTo({top:0,behavior:'smooth'});}
   function selectDate(date,focus=false){if(!validDate(date))return;state.date=date;state.month=date.slice(0,7);state.week=weekForDate(date);render();if(focus)document.querySelector(`[data-date="${date}"]`)?.focus({preventScroll:true});}
   function renderCurrent(){if(!authorized||!data)return;if(state.view==='calendar')renderCalendar();else if(state.view==='week')renderWeek();else renderLibrary();syncProgressControls();}
   function bind(){
@@ -1134,6 +1216,8 @@ window.STUDY_AUTH_CONFIG = {
     listen('searchInput','input',e=>{state.q=e.target.value.trim();state.limit=60;renderCurrent();});
     listen('includePending','change',e=>{state.pending=e.target.checked;state.limit=60;renderLibrary();});
     listen('onlySaved','change',e=>{state.savedOnly=e.target.checked;state.limit=60;renderLibrary();});
+    for(const[id,key]of [['sourceTypeFilter','sourceType'],['sourceFilter','source'],['yearFilter','academicYear']])listen(id,'change',e=>{state[key]=e.target.value;state.limit=60;renderLibrary();});
+    listen('clearSourceFilters','click',()=>{resetSourceFilters();state.limit=60;renderLibrary();});
     listen('loadMore','click',()=>{state.limit+=60;renderLibrary();});
     listen('syncRetry','click',async()=>{if(typeof onRefresh!=='function')return;const generation=mountGeneration,refresh=onRefresh;syncStatus({state:'loading'});try{await refresh();}catch{if(authorized&&generation===mountGeneration)syncStatus({state:'error'});}});
     function help(){$('detailDialog').showModal();}
@@ -1145,10 +1229,12 @@ window.STUDY_AUTH_CONFIG = {
     mountGeneration++;authorized=false;isOwner=false;patchBusy=false;progressRevision=-1;onPatch=null;onRefresh=null;
     data=null;courseMap.clear();materialMap.clear();done.clear();saved.clear();read.clear();start=0;maxWeek=1;currentWeek=1;
     $('studyApp').hidden=true;
-    for(const id of ['courseNav','weekSelect','courseSelect','statsStrip','filterSummary','calendarGrid','dayAgenda','calendarFlexible','weeklyView','materialResults'])$(id).innerHTML='';
+    for(const id of ['courseNav','weekSelect','courseSelect','sourceTypeFilter','sourceFilter','yearFilter','statsStrip','filterSummary','calendarGrid','dayAgenda','calendarFlexible','weeklyView','materialResults'])$(id).innerHTML='';
     for(const id of ['courseTotal','snapshotNote','dataAbout','syncStatus','progressStatus','heroSubtitle','calendarMonth','agendaTitle','agendaWeek','agendaProgress','weekEmblem','loadMore','toast'])$(id).textContent='';
     $('sourceLink').hidden=true;$('sourceLink').removeAttribute('href');$('syncStatus').removeAttribute('title');
     $('searchInput').value='';$('includePending').checked=false;$('onlySaved').checked=false;
+    for(const id of ['sourceTypeFilter','sourceFilter','yearFilter'])$(id).value='all';
+    $('clearSourceFilters').hidden=true;
     $('calendarView').hidden=true;$('weeklyView').hidden=true;$('materialsView').hidden=true;$('loadMore').hidden=true;
     $('toast').hidden=true;clearTimeout(notify.timer);
     try{$('detailDialog').close();}catch{}
@@ -1351,7 +1437,7 @@ window.STUDY_AUTH_CONFIG = {
           if (typeof catalog?.csv !== 'string') throw failure('INVALID_CATALOG', '索引內容不完整');
           // Generate missing IDs solely from this CSV, consistently with the backend
           // and other devices. Never infer cloud progress identity from an older view.
-          const data = parser(catalog.csv, {}, config, new Date(clock()).toISOString());
+          const data = parser(catalog.csv, {}, config, new Date(clock()).toISOString(), catalog.sourceTags === undefined ? {} : catalog.sourceTags);
           requireCurrent(ctx);
           const alreadyOpen = ctx.authorized;
           ctx.data = data;
