@@ -660,7 +660,7 @@ dialog::backdrop { background: rgb(24 43 30 / 36%); backdrop-filter: blur(3px); 
     <footer class="help-bar"><span id="snapshotNote"></span><button id="aboutButton" class="text-button">使用方式與資料範圍 <span aria-hidden="true">↗</span></button></footer>
   </main>
 </div>
-<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按資料類型、來源、署名與教材學年篩選及收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。來源標籤列出已知的來源集合與檔名署名，不保證署名者是每份原作者；「學年待補」表示尚未確認原教材學年。Moodle 標示的是資料來源，收錄學期不一定等於教材原學年，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。檢視者可查看課程與教材並更新自己的進度，無法管理網站、編輯索引或管理雲端硬碟。開啟原始資料仍需要對應的 Google Drive 檢視權；網站核准與原檔授權分開，僅能申請管理員指定教材範圍的檢視權。</p><p id="dataAbout"></p></div></dialog>
+<dialog id="detailDialog" aria-labelledby="dialogTitle"><div class="dialog-header"><h2 id="dialogTitle">讓這裡成為你的每日起點</h2><button class="icon-button" id="closeDialog" aria-label="關閉說明"></button></div><div class="dialog-body"><ol><li><strong>看日曆：</strong>點選日期，查看當天課程、主題、教師與資料；也可切換每週課程。日曆依課程清單日期顯示，沒有推測上課時間。方向鍵移動日期，Home／End 移到當週首末，Page Up／Page Down 切換月份。</li><li><strong>開資料：</strong>配對的 Moodle 課堂資料會排在前面，再列出原索引建議先讀的資料；點選名稱另開原檔。</li><li><strong>讀完打勾：</strong>每份資料旁的「已讀」核取方塊會同步更新日曆、每週課程與資料書架的閱讀標記。同一份資料只需勾一次。每堂的「課程完成」可另外標記整堂複習進度。</li><li><strong>看完整清單：</strong>按「此課全部資料」，或切換「資料書架」，可搜尋、按資料類型、來源、署名與教材學年篩選及收藏。</li><li><strong>更新索引：</strong>登入並經核准後會載入課程索引，也可按「更新索引」。無法重新確認帳號權限時會鎖定內容，連線恢復後可重新確認狀態。</li></ol><div class="dialog-note"><strong>資料使用提醒</strong><p>「優先使用」表示教師與主題較直接符合；「主題可用」仍須留意換老師、舊範圍及年代差異。「待核對」預設隱藏，尚未確認內容，不當作已核對的備考資料。來源標籤列出已知的來源集合與檔名署名，不保證署名者是每份原作者；「學年待補」表示尚未確認原教材學年。Moodle 標示的是資料來源，收錄學期不一定等於教材原學年，配對仍以主題與核對依據為準。請以本期教師最新公告為準。</p></div><p>已讀、課程完成及收藏儲存在你的帳號，使用同一帳號登入其他裝置即可接續；不會寫回課程試算表。每次勾選請留意儲存狀態，連線失敗時可重試。登出後會清除頁面內的課程與個人進度。</p><p>申請者預設為檢視者，可查看課程、教材並更新自己的進度。網站擁有者可另外授予或取消管理員；管理員可處理一般存取申請，並透過「管理員索引」維護課程內容。只有網站擁有者能指定其他管理員。網站身分與 Google Drive 權限分開，教材檢視、索引編輯及指定資料夾管理都須另外授權；取消網站權限不會自動撤銷原檔分享。</p><p id="dataAbout"></p></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 <noscript><p class="empty-state">請使用允許 JavaScript 的瀏覽器開啟此網站。</p></noscript>
 <script>
@@ -938,7 +938,7 @@ window.STUDY_AUTH_CONFIG = {
 <script>
 (() => {
   'use strict';
-  let data=null,authorized=false,isOwner=false,mountGeneration=0,patchBusy=false,progressRevision=-1,onPatch=null,onRefresh=null;
+  let data=null,authorized=false,isAdmin=false,mountGeneration=0,patchBusy=false,progressRevision=-1,onPatch=null,onRefresh=null;
   const $ = id => document.getElementById(id);
   const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const icons = {
@@ -1051,14 +1051,14 @@ window.STUDY_AUTH_CONFIG = {
   }
   function route(){const p=new URLSearchParams({week:String(state.week),view:state.view});if(state.view==='calendar')p.set('date',state.date);if(state.course!=='all')p.set('course',state.course);try{history.replaceState(null,'','#'+p.toString());}catch{}}
   function metadata(){
-    $('sourceLink').hidden=!isOwner;
-    if(isOwner)$('sourceLink').href=urlFor(data.meta.sourceUrl);
+    $('sourceLink').hidden=!isAdmin;
+    if(isAdmin)$('sourceLink').href=urlFor(data.meta.sourceUrl);
     else $('sourceLink').removeAttribute('href');
     $('weekSelect').innerHTML=Array.from({length:maxWeek},(_,i)=>{const w=i+1,[a,b]=weekDates(w);return `<option value="${w}">第 ${String(w).padStart(2,'0')} 週 · ${a.slice(5).replace('-','/')} – ${b.slice(5).replace('-','/')}</option>`;}).join('');
     $('courseSelect').innerHTML='<option value="all">全部課程</option>'+data.courses.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
     const updated=String(data.meta.updatedAt||'').slice(0,10).replaceAll('-','/');
     $('snapshotNote').textContent=`索引版本 ${updated||'未註明'} · 開啟原檔需網路及 Google Drive 權限`;
-    $('dataAbout').textContent=`收錄 ${data.courses.length} 門課、${data.sessions.length} 個課程時段；${usableCount()} 份可用資料及 ${data.materials.length-usableCount()} 份待核對。${isOwner&&data.meta.excludedCount?`另有 ${data.meta.excludedCount} 份未納入本網站，可在原始索引回查原因。`:''}份數包含不同版本與已標記的重複資料。`;
+    $('dataAbout').textContent=`收錄 ${data.courses.length} 門課、${data.sessions.length} 個課程時段；${usableCount()} 份可用資料及 ${data.materials.length-usableCount()} 份待核對。${isAdmin&&data.meta.excludedCount?`另有 ${data.meta.excludedCount} 份未納入本網站，可在原始索引回查原因。`:''}份數包含不同版本與已標記的重複資料。`;
     $('courseTotal').textContent=data.courses.length;
     sourceFilterOptions();
   }
@@ -1074,7 +1074,7 @@ window.STUDY_AUTH_CONFIG = {
   function applyData(next,options){
     if(!authorized)return false;
     if(!validateData(next)){syncStatus({state:'error',message:'收到的索引格式不完整，保留目前資料。'});return false;}
-    if(options)isOwner=options.isOwner===true;
+    if(options)isAdmin=options.isAdmin===undefined?options.isOwner===true:options.isAdmin===true;
     data=next;rebuildData();
     if(state.course!=='all'&&!courseMap.has(state.course))state.course='all';
     state.week=state.view==='calendar'?weekForDate(state.date):Math.min(maxWeek,Math.max(1,state.week));
@@ -1226,7 +1226,7 @@ window.STUDY_AUTH_CONFIG = {
     document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();if(!authorized)return;state.course='all';state.view='calendar';state.q='';$('searchInput').value='';selectDate(today);});
   }
   function lock(){
-    mountGeneration++;authorized=false;isOwner=false;patchBusy=false;progressRevision=-1;onPatch=null;onRefresh=null;
+    mountGeneration++;authorized=false;isAdmin=false;patchBusy=false;progressRevision=-1;onPatch=null;onRefresh=null;
     data=null;courseMap.clear();materialMap.clear();done.clear();saved.clear();read.clear();start=0;maxWeek=1;currentWeek=1;
     $('studyApp').hidden=true;
     for(const id of ['courseNav','weekSelect','courseSelect','sourceTypeFilter','sourceFilter','yearFilter','statsStrip','filterSummary','calendarGrid','dayAgenda','calendarFlexible','weeklyView','materialResults'])$(id).innerHTML='';
@@ -1243,13 +1243,14 @@ window.STUDY_AUTH_CONFIG = {
   function unlock(options={}){
     lock();
     if(!validateData(options.data)||!validateProgress(options.progress)||typeof options.onPatch!=='function')throw new Error('已核准帳號的資料或進度尚未完整載入');
-    data=options.data;isOwner=options.isOwner===true;rebuildData();replaceProgress(options.progress);onPatch=options.onPatch;onRefresh=typeof options.onRefresh==='function'?options.onRefresh:null;
+    data=options.data;isAdmin=options.isAdmin===undefined?options.isOwner===true:options.isAdmin===true;rebuildData();replaceProgress(options.progress);onPatch=options.onPatch;onRefresh=typeof options.onRefresh==='function'?options.onRefresh:null;
     resetState(initialRouteAvailable);initialRouteAvailable=false;authorized=true;
     metadata();render();progressStatus('已同步你的帳號進度');syncStatus({state:'fresh'});$('syncRetry').hidden=!onRefresh;$('studyApp').hidden=false;
     return true;
   }
   function updateProgress(progress){if(!authorized)return false;const changed=replaceProgress(progress);if(changed)renderCurrent();return changed;}
-  window.StudyApp=Object.freeze({unlock,lock,updateData:applyData,updateProgress,setSyncStatus:syncStatus});
+  function updateAccess(options={}){if(!authorized)return false;isAdmin=options.isAdmin===undefined?options.isOwner===true:options.isAdmin===true;metadata();return true;}
+  window.StudyApp=Object.freeze({unlock,lock,updateData:applyData,updateProgress,updateAccess,setSyncStatus:syncStatus});
   init();
 })();
 
@@ -1263,6 +1264,14 @@ window.STUDY_AUTH_CONFIG = {
   const ID = /^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/;
   const STATES = ['approved', 'pending', 'denied', 'revoked'];
   const failure = (code, message, retryable = false) => Object.assign(new Error(message), {code, retryable});
+  function accessRole(value) {
+    if ((value.isOwner !== undefined && typeof value.isOwner !== 'boolean') || (value.isAdmin !== undefined && typeof value.isAdmin !== 'boolean')) throw failure('INVALID_ROLE', '帳號權限格式不正確');
+    const isOwner = value.isOwner === true;
+    // Older server sessions have only isOwner. They can grant no delegated role.
+    const isAdmin = value.isAdmin === undefined ? isOwner : value.isAdmin;
+    if ((isOwner && !isAdmin) || (value.role !== undefined && value.role !== (isAdmin ? 'admin' : 'viewer'))) throw failure('INVALID_ROLE', '帳號權限回應不符');
+    return {isOwner, isAdmin, role: isAdmin ? 'admin' : 'viewer'};
+  }
 
   function validConfig(config) {
     if (!config?.firebase || !['apiKey', 'authDomain', 'projectId', 'appId'].every(key => typeof config.firebase[key] === 'string' && config.firebase[key].trim() && !/[<>]|REPLACE|PLACEHOLDER|YOUR_/i.test(config.firebase[key]))) return false;
@@ -1304,13 +1313,13 @@ window.STUDY_AUTH_CONFIG = {
     }
     function renderGate(title, message, {login = false, retry = false, logout = false, busy = false, reloadLogin = false} = {}) {
       gate.hidden = false;
-      gate.innerHTML = `<section class="auth-card" aria-labelledby="authTitle"><p class="section-kicker">課間 · 帳號存取</p><h1 id="authTitle" class="auth-title">${esc(title)}</h1><p class="auth-copy" role="status">${esc(message)}</p><p class="auth-notice">首次登入會將你的姓名與電子郵件寄給管理員 ${esc(config.ownerEmail || 'yieyu049@gmail.com')}，申請檢視者身分。核准後可查看課程與教材，並儲存自己的已讀、課程完成與收藏。申請者不會取得網站管理、索引編輯或雲端硬碟管理權限。</p><p class="auth-copy auth-scope-note">網站核准與 Google Drive 原檔權限分開。無法開啟的教材，僅能向管理員申請指定範圍的檢視權；管理員另行確認原檔權限。</p><div class="auth-actions">${login?'<button type="button" class="auth-button" data-auth-action="login">使用 Google 登入並申請檢視</button>':''}${retry?'<button type="button" class="auth-button" data-auth-action="retry">重新確認狀態</button>':''}${logout?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出／更換帳號</button>':''}${reloadLogin?'<button type="button" class="auth-button" data-auth-action="reload-login">重新載入登入頁</button>':''}${busy?'<span class="auth-status">處理中…</span>':''}</div></section>`;
+      gate.innerHTML = `<section class="auth-card" aria-labelledby="authTitle"><p class="section-kicker">課間 · 帳號存取</p><h1 id="authTitle" class="auth-title">${esc(title)}</h1><p class="auth-copy" role="status">${esc(message)}</p><p class="auth-notice">首次登入會將你的姓名與電子郵件寄給網站擁有者 ${esc(config.ownerEmail || 'yieyu049@gmail.com')}，申請檢視者身分。核准後可查看課程與教材，並儲存自己的已讀、課程完成與收藏。只有網站擁有者可以另外授予管理員身分。</p><p class="auth-copy auth-scope-note">網站核准與 Google Drive 原檔權限分開。無法開啟的教材，可向管理員申請指定範圍的檢視權；索引編輯與教材管理權限須另外授予。</p><div class="auth-actions">${login?'<button type="button" class="auth-button" data-auth-action="login">使用 Google 登入並申請檢視</button>':''}${retry?'<button type="button" class="auth-button" data-auth-action="retry">重新確認狀態</button>':''}${logout?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出／更換帳號</button>':''}${reloadLogin?'<button type="button" class="auth-button" data-auth-action="reload-login">重新載入登入頁</button>':''}${busy?'<span class="auth-status">處理中…</span>':''}</div></section>`;
     }
     function renderAccount(ctx) {
       if (!current(ctx) || !ctx.profile) { account.innerHTML = ''; account.hidden = true; return; }
       account.hidden = false;
-      const role = ctx.profile.isOwner && ctx.authorized ? '管理員' : ctx.authorized ? '檢視者' : '檢視申請待核准';
-      account.innerHTML = `<div class="auth-account-bar"><span><strong>${esc(ctx.profile.name || ctx.profile.email)}</strong><small>${esc(ctx.profile.email)}</small></span><span class="auth-role" data-role="${ctx.profile.isOwner && ctx.authorized ? 'admin' : 'viewer'}">${role}</span><div class="auth-actions">${ctx.profile.isOwner && ctx.authorized?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">管理申請</button>':''}<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出</button></div></div>`;
+      const role = !ctx.authorized ? '檢視申請待核准' : ctx.profile.isOwner ? '網站擁有者' : ctx.profile.isAdmin ? '管理員' : '檢視者';
+      account.innerHTML = `<div class="auth-account-bar"><span><strong>${esc(ctx.profile.name || ctx.profile.email)}</strong><small>${esc(ctx.profile.email)}</small></span><span class="auth-role" data-role="${ctx.profile.isAdmin && ctx.authorized ? 'admin' : 'viewer'}">${role}</span><div class="auth-actions">${ctx.profile.isAdmin && ctx.authorized?'<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">管理申請</button>':''}<button type="button" class="auth-button auth-button-secondary" data-auth-action="logout">登出</button></div></div>`;
     }
     function reset() {
       epoch++;
@@ -1321,7 +1330,7 @@ window.STUDY_AUTH_CONFIG = {
       app.lock(); account.innerHTML = ''; account.hidden = true; admin.innerHTML = ''; admin.hidden = true;
     }
     function newContext(user) {
-      return {epoch, uid: user.uid, user, authorized: false, profile: null, status: '', data: null, progress: null, refreshing: null, patchQueue: Promise.resolve()};
+      return {epoch, uid: user.uid, user, authorized: false, profile: null, status: '', data: null, progress: null, refreshing: null, patchQueue: Promise.resolve(), adminRequest: 0, adminUsers: new Map(), adminBusy: false};
     }
     function showError(ctx, error) {
       if (!current(ctx) || error?.code === 'STALE') return;
@@ -1385,10 +1394,19 @@ window.STUDY_AUTH_CONFIG = {
     }
     function checkSession(ctx, result) {
       if (!result || result.user?.uid !== ctx.uid || typeof result.user.email !== 'string' || !STATES.includes(result.status)) throw failure('IDENTITY_MISMATCH', '帳號回應不符');
-      ctx.profile = {uid: ctx.uid, email: result.user.email, name: String(result.user.name || ''), isOwner: result.user.isOwner === true};
+      const nextRole = accessRole(result.user);
+      const roleChanged = ctx.profile && (ctx.profile.isOwner !== nextRole.isOwner || ctx.profile.isAdmin !== nextRole.isAdmin);
+      ctx.profile = {uid: ctx.uid, email: result.user.email, name: String(result.user.name || ''), ...nextRole};
       ctx.status = result.status;
-      if (!ctx.profile.isOwner) { admin.hidden = true; admin.innerHTML = ''; }
+      if (roleChanged || !nextRole.isAdmin || result.status !== 'approved') clearAdmin(ctx);
+      // Remove management links as soon as a demotion is confirmed, even while
+      // the refreshed catalog is still loading.
+      if (ctx.authorized) { app.updateAccess?.(nextRole); renderAccount(ctx); }
       return result;
+    }
+    function clearAdmin(ctx = context) {
+      if (ctx) { ctx.adminRequest++; ctx.adminUsers.clear(); }
+      admin.hidden = true; admin.innerHTML = '';
     }
     function showAccessState(ctx, session) {
       // A revocation also invalidates queued progress writes and concurrent reads.
@@ -1444,10 +1462,10 @@ window.STUDY_AUTH_CONFIG = {
           // A progress PATCH can finish while a refresh is in flight.
           if (!ctx.progress || progress.revision > ctx.progress.revision) ctx.progress = progress;
           ctx.authorized = true; gate.hidden = true; gate.innerHTML = ''; renderAccount(ctx);
-          if (alreadyOpen) { app.updateData(data, {isOwner: ctx.profile.isOwner}); app.updateProgress(ctx.progress); }
-          else app.unlock({data, progress: ctx.progress, isOwner: ctx.profile.isOwner, onPatch: (kind, id, checked) => patch(ctx, kind, id, checked), onRefresh: () => refresh(ctx)});
+          if (alreadyOpen) { app.updateData(data, {isOwner: ctx.profile.isOwner, isAdmin: ctx.profile.isAdmin}); app.updateProgress(ctx.progress); }
+          else app.unlock({data, progress: ctx.progress, isOwner: ctx.profile.isOwner, isAdmin: ctx.profile.isAdmin, onPatch: (kind, id, checked) => patch(ctx, kind, id, checked), onRefresh: () => refresh(ctx)});
           app.setSyncStatus({state: 'fresh', message: '已同步課程與你的學習進度。', updatedAt: data.meta.updatedAt});
-          if (ctx.profile.isOwner && adminWanted) await loadAdmin(ctx);
+          if (ctx.profile.isAdmin && adminWanted) await loadAdmin(ctx);
           return data;
         } catch (error) { showError(ctx, error); return null; }
         finally { ctx.refreshing = null; }
@@ -1501,23 +1519,61 @@ window.STUDY_AUTH_CONFIG = {
       catch { if (!destroyed && epoch === logoutEpoch) renderGate('內容已鎖定', '登出服務暫時無法連線。請重試，或關閉此分頁結束登入狀態。', {logout: true}); }
     }
     async function loadAdmin(ctx = context) {
-      if (!ctx || !current(ctx) || !ctx.authorized || !ctx.profile?.isOwner) return;
+      if (!ctx || !current(ctx) || !ctx.authorized || !ctx.profile?.isAdmin) return;
+      const adminRequest = ++ctx.adminRequest;
+      const active = () => current(ctx) && ctx.authorized && ctx.profile?.isAdmin && ctx.adminRequest === adminRequest;
       adminWanted = true; admin.hidden = false;
+      ctx.adminUsers.clear();
       admin.innerHTML = '<section class="auth-admin-card"><h2>管理存取申請</h2><p role="status">正在讀取申請…</p></section>';
       try {
         const result = await request(ctx, 'admin.list'); requireCurrent(ctx);
+        if (!active()) return;
         if (!Array.isArray(result?.users)) throw failure('INVALID_RESPONSE', '申請清單不完整');
-        const users = result.users.filter(user => typeof user.uid === 'string' && typeof user.email === 'string' && STATES.includes(user.status));
+        const users = result.users.map(user => {
+          if (!user || typeof user.uid !== 'string' || !ID.test(user.uid) || typeof user.email !== 'string' || !STATES.includes(user.status)) throw failure('INVALID_RESPONSE', '申請清單格式不正確');
+          const legacyOwner = user.isOwner === undefined && user.email.toLowerCase() === config.ownerEmail?.toLowerCase();
+          return {...user, ...accessRole(legacyOwner ? {...user, isOwner: true} : user)};
+        });
+        if (new Set(users.map(user => user.uid)).size !== users.length) throw failure('INVALID_RESPONSE', '申請清單帳號重複');
+        ctx.adminUsers = new Map(users.map(user => [user.uid, user]));
         const labels = {pending: '檢視申請待核准', approved: '檢視者 · 已核准', denied: '已拒絕', revoked: '已撤銷'};
-        admin.innerHTML = `<section class="auth-admin-card"><div class="auth-actions"><h2>管理存取申請</h2><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">重新整理</button><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-close">關閉</button></div><p class="auth-copy">申請者僅可核准為檢視者，可查看課程與教材、儲存自己的學習進度。Google Drive 原檔須另外確認，僅授予指定教材範圍的檢視權。網站核准不會自動變更原檔權限；撤銷網站存取後，也須另行檢查原檔分享設定。</p><p class="auth-copy">只有管理員可管理申請與維護索引；開啟郵件連結不會自動核准。</p><div class="auth-admin-list">${users.length ? users.map(user => `<article class="auth-admin-user"><div><strong>${esc(user.name || user.email)}</strong><p>${esc(user.email)}</p><span class="auth-status">${user.uid === ctx.uid ? '管理員' : labels[user.status]}</span></div><div class="auth-actions">${user.uid === ctx.uid ? '<span>管理員本人</span>' : `${user.status !== 'approved' ? `<button type="button" class="auth-button" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="approved">核准為檢視者</button>` : `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="revoked">撤銷網站存取</button>`}${user.status === 'pending' ? `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="denied">拒絕</button>` : ''}`}</div></article>`).join('') : '<p>目前沒有申請。</p>'}</div></section>`;
-      } catch (error) { showError(ctx, error); }
+        const controls = user => {
+          if (user.uid === ctx.uid) return `<span>${ctx.profile.isOwner ? '網站擁有者本人' : '管理員本人'}</span>`;
+          if (user.isOwner) return '<span>網站擁有者</span>';
+          if (user.isAdmin) return ctx.profile.isOwner ? `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-role" data-target-uid="${esc(user.uid)}" data-target-role="viewer">取消管理員</button>` : '<span>由網站擁有者管理</span>';
+          const status = user.status !== 'approved' ? `<button type="button" class="auth-button" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="approved">核准為檢視者</button>` : `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="revoked">撤銷網站存取</button>`;
+          const deny = user.status === 'pending' ? `<button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-set" data-target-uid="${esc(user.uid)}" data-target-status="denied">拒絕</button>` : '';
+          const grant = ctx.profile.isOwner && user.status === 'approved' ? `<button type="button" class="auth-button" data-auth-action="admin-role" data-target-uid="${esc(user.uid)}" data-target-role="admin">授予管理員</button>` : '';
+          return status + deny + grant;
+        };
+        admin.innerHTML = `<section class="auth-admin-card"><div class="auth-actions"><h2>管理存取申請</h2><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin">重新整理</button><button type="button" class="auth-button auth-button-secondary" data-auth-action="admin-close">關閉</button></div><p class="auth-copy">申請者預設核准為檢視者，可查看課程與教材、儲存自己的學習進度。網站擁有者可另外授予或取消管理員；管理員可管理一般申請者並維護課程索引。</p><p class="auth-copy">網站核准與管理員身分不會自動變更原檔權限。索引編輯及指定教材資料夾的 Google Drive 權限須另外授予；取消管理員或撤銷網站存取後，也須另行檢查原檔分享設定。</p><p class="auth-copy">${ctx.profile.isOwner ? '只有你能授予或取消管理員。取消管理員後，對方仍可作為檢視者使用網站；需要停止存取時，再撤銷網站存取。' : '你可核准、拒絕或撤銷一般申請者的網站存取。管理員身分由網站擁有者管理。'} 開啟郵件連結不會自動核准。</p><div class="auth-admin-list">${users.length ? users.map(user => `<article class="auth-admin-user"><div><strong>${esc(user.name || user.email)}</strong><p>${esc(user.email)}</p><span class="auth-status">${user.isOwner ? '網站擁有者' : user.isAdmin ? '管理員 · 已核准' : labels[user.status]}</span></div><div class="auth-actions">${controls(user)}</div></article>`).join('') : '<p>目前沒有申請。</p>'}</div></section>`;
+      } catch (error) { if (active()) showError(ctx, error); }
     }
     async function adminSet(uid, status) {
       const ctx = context;
-      if (!ctx || !current(ctx) || !ctx.authorized || !ctx.profile?.isOwner || !['approved', 'denied', 'revoked'].includes(status)) return;
+      if (!ctx || !current(ctx) || !ctx.authorized || !ctx.profile?.isAdmin || ctx.adminBusy || !['approved', 'denied', 'revoked'].includes(status)) return;
+      const target = ctx.adminUsers.get(uid);
+      if (!target || target.uid === ctx.uid || target.isOwner || target.isAdmin) return;
+      const adminRequest = ctx.adminRequest;
+      const active = () => current(ctx) && ctx.profile?.isAdmin && ctx.adminRequest === adminRequest;
+      ctx.adminBusy = true;
       admin.querySelectorAll('button').forEach(button => { button.disabled = true; });
-      try { await request(ctx, 'admin.set', {uid, status}); requireCurrent(ctx); await loadAdmin(ctx); }
-      catch (error) { showError(ctx, error); }
+      try { await request(ctx, 'admin.set', {uid, status}); if (active()) await loadAdmin(ctx); }
+      catch (error) { if (active()) showError(ctx, error); }
+      finally { ctx.adminBusy = false; }
+    }
+    async function adminRole(uid, role) {
+      const ctx = context;
+      if (!ctx || !current(ctx) || !ctx.authorized || !ctx.profile?.isOwner || ctx.adminBusy || !['admin', 'viewer'].includes(role)) return;
+      const target = ctx.adminUsers.get(uid);
+      if (!target || target.uid === ctx.uid || target.isOwner || target.status !== 'approved' || target.role === role) return;
+      const adminRequest = ctx.adminRequest;
+      const active = () => current(ctx) && ctx.profile?.isOwner && ctx.adminRequest === adminRequest;
+      ctx.adminBusy = true;
+      admin.querySelectorAll('button').forEach(button => { button.disabled = true; });
+      try { await request(ctx, 'admin.role', {uid, role}); if (active()) await loadAdmin(ctx); }
+      catch (error) { if (active()) showError(ctx, error); }
+      finally { ctx.adminBusy = false; }
     }
     function click(event) {
       const button = event.target.closest?.('[data-auth-action]'); if (!button || button.disabled) return;
@@ -1527,8 +1583,9 @@ window.STUDY_AUTH_CONFIG = {
       else if (action === 'logout') logout();
       else if (action === 'retry') refresh();
       else if (action === 'admin') loadAdmin();
-      else if (action === 'admin-close') { adminWanted = false; admin.hidden = true; admin.innerHTML = ''; }
+      else if (action === 'admin-close') { adminWanted = false; clearAdmin(); }
       else if (action === 'admin-set') adminSet(button.dataset.targetUid, button.dataset.targetStatus);
+      else if (action === 'admin-role') adminRole(button.dataset.targetUid, button.dataset.targetRole);
     }
     function maybeRefresh() { if (context && document.visibilityState !== 'hidden' && clock() - lastCheck >= 60000) refresh(); }
     function start() {
